@@ -13,3 +13,7 @@ while running:
             break
 
     #Draw loop
+    display_surface.fill('red')
+    pygame.display.update()
+
+pygame.quit() 
