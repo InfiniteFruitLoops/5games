@@ -34,7 +34,7 @@ laser_rect = laser_surf.get_frect(bottomleft = (20, WINDOW_HEIGHT-20))
 
 
 while running:
-    dt = clock.tick()
+    dt = clock.tick(60)
     #Event loop 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -61,7 +61,9 @@ while running:
     
     player_rect.center += player_direction * PLAYER_SPEED/1000 * dt
     if player_rect.right >= WINDOW_WIDTH or player_rect.left <= 0:
-        player_direction = player_direction * -1
+        player_direction.x = player_direction.x * -1
+    if player_rect.bottom >= WINDOW_HEIGHT or player_rect.top <= 0:
+        player_direction.y = player_direction.y * -1
     
     pygame.display.update()
 
