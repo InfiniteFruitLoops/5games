@@ -16,8 +16,8 @@ running = True
 #Import player   
 player_surf = pygame.image.load(join('..','images','player.png')).convert_alpha() #To ensure robustness
 player_rect = player_surf.get_frect(center = (WINDOW_WIDTH/2, WINDOW_HEIGHT/2))
-PLAYER_SPEED = 0.4
-player_direction = +1
+PLAYER_SPEED = 100
+player_direction = pygame.math.Vector2(2,-1)
 
 #Import star
 star_surf = pygame.image.load(join('..','images','star.png')).convert_alpha()
@@ -34,7 +34,7 @@ laser_rect = laser_surf.get_frect(bottomleft = (20, WINDOW_HEIGHT-20))
 
 
 while running:
-    clock.tick(60)
+    dt = clock.tick()
     #Event loop 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -58,7 +58,8 @@ while running:
 
     #Draw and move player
     display_surface.blit(player_surf,player_rect)
-    player_rect.left += player_direction * PLAYER_SPEED
+    
+    player_rect.center += player_direction * PLAYER_SPEED/1000 * dt
     if player_rect.right >= WINDOW_WIDTH or player_rect.left <= 0:
         player_direction = player_direction * -1
     
